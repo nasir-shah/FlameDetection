@@ -130,6 +130,7 @@ flame_img = clone[CONST_UPPER_LEFT_Y:CONST_BOTTOM_RIGHT_Y , CONST_UPPER_LEFT_X:C
 
 prev = cv2.cvtColor(flame_img , cv2.COLOR_BGR2GRAY)
 
+
 hsv = np.zeros_like(flame_img)
 hsv[...,1] = 255
 prev_bgr =hsv
