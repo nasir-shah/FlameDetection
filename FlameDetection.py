@@ -159,8 +159,8 @@ while(True):
 		print("\n###############################################\n")
 		cv2.rectangle(frame, (CONST_UPPER_LEFT_X, CONST_UPPER_LEFT_Y), (CONST_BOTTOM_RIGHT_X, CONST_BOTTOM_RIGHT_Y), (0,255,0), 4)
 	
-	cv2.imshow('frame2',frame)
-	cv2.imshow('bgr',prev_bgr)
+	cv2.imshow('Flame Detection',frame)
+	cv2.imshow('Motion of pixels',prev_bgr)
 	
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
