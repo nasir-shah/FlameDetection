@@ -2,6 +2,9 @@
 import numpy as np
 import cv2
 import math
+import sys
+
+sys.path.append('./../CONSTANTS')
 import CONSTANTS as CON
 
 def Motion_Detaction(prev , next):
