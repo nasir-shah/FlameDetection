@@ -2,39 +2,7 @@
 import numpy as np
 import cv2
 import math
-from time import time
-
-# Constants
-
-CONST_AREA_THRESHOLD = 20
-CONST_FLAME_THRESHOLD = 10
-
-# Given ROI
-
-CONST_UPPER_LEFT_X = 570
-CONST_UPPER_LEFT_Y = 40
-CONST_BOTTOM_RIGHT_X = 637
-CONST_BOTTOM_RIGHT_Y = 94
-
-
-
-# False Flame
-
-#CONST_UPPER_LEFT_X = 201
-#CONST_UPPER_LEFT_Y = 163
-#CONST_BOTTOM_RIGHT_X = 335
-#CONST_BOTTOM_RIGHT_Y = 223
-
-#Smoke Part
-
-#CONST_UPPER_LEFT_X = 391
-#CONST_UPPER_LEFT_Y = 65
-#CONST_BOTTOM_RIGHT_X = 546
-#CONST_BOTTOM_RIGHT_Y = 167
-
-
-
-
+import CONSTANTS as CON
 
 def Motion_Detaction(prev , next):
 	
@@ -101,7 +69,7 @@ def HSI_Color_Format(img):
 	size = (img.shape[1] * img.shape[0])
 	flame_per = 100 - (count*100)/size
 	
-	if flame_per < CONST_FLAME_THRESHOLD:
+	if flame_per < CON.CONST_FLAME_THRESHOLD:
 		#print(flame_per)
 		return False
 	return True
@@ -115,7 +83,7 @@ def Flame_Area_Detection(gray):
 	white_pixel_count = np.count_nonzero(img_linear == 255)
 	per_b_pixel = (white_pixel_count/len(img_linear)) * 100
 	
-	if(per_b_pixel < CONST_AREA_THRESHOLD):
+	if(per_b_pixel < CON.CONST_AREA_THRESHOLD):
 		#print(per_b_pixel)
 		return False
 	return True
@@ -123,11 +91,11 @@ def Flame_Area_Detection(gray):
 	
 
 
-cap = cv2.VideoCapture('flame.mkv')
+cap = cv2.VideoCapture('./../Data/flame.mkv')
 ret ,img =  cap.read()
 
 clone = img.copy()
-flame_img = clone[CONST_UPPER_LEFT_Y:CONST_BOTTOM_RIGHT_Y , CONST_UPPER_LEFT_X:CONST_BOTTOM_RIGHT_X]
+flame_img = clone[CON.CONST_UPPER_LEFT_Y:CON.CONST_BOTTOM_RIGHT_Y , CON.CONST_UPPER_LEFT_X:CON.CONST_BOTTOM_RIGHT_X]
 
 prev = cv2.cvtColor(flame_img , cv2.COLOR_BGR2GRAY)
 
@@ -141,7 +109,7 @@ while(True):
 	ret, frame = cap.read()
 	
 	clone = frame.copy()
-	next_frame = clone[CONST_UPPER_LEFT_Y:CONST_BOTTOM_RIGHT_Y , CONST_UPPER_LEFT_X:CONST_BOTTOM_RIGHT_X]
+	next_frame = clone[CON.CONST_UPPER_LEFT_Y:CON.CONST_BOTTOM_RIGHT_Y , CON.CONST_UPPER_LEFT_X:CON.CONST_BOTTOM_RIGHT_X]
 	next = cv2.cvtColor(next_frame, cv2.COLOR_BGR2GRAY)
 	
 	r1 , prev_bgr = Motion_Detaction(prev , next)
@@ -149,7 +117,7 @@ while(True):
 	r3 = Flame_Area_Detection(next)
 
 	if(r1 and r2 and r3):
-		cv2.rectangle(frame, (CONST_UPPER_LEFT_X, CONST_UPPER_LEFT_Y), (CONST_BOTTOM_RIGHT_X, CONST_BOTTOM_RIGHT_Y), (0,0,255), 4)
+		cv2.rectangle(frame, (CON.CONST_UPPER_LEFT_X, CON.CONST_UPPER_LEFT_Y), (CON.CONST_BOTTOM_RIGHT_X, CON.CONST_BOTTOM_RIGHT_Y), (0,0,255), 4)
 	else:
 		#cv2.imwrite("./data/"+str(temp)+'frame.png',frame)
 		print("###############################################\n")
@@ -157,7 +125,7 @@ while(True):
 		print("Is Flame content valid ::::::::::::::::::: ",r2)
 		print("Is Flame size valid :::::::::::::::::::::: ",r3)
 		print("\n###############################################\n")
-		cv2.rectangle(frame, (CONST_UPPER_LEFT_X, CONST_UPPER_LEFT_Y), (CONST_BOTTOM_RIGHT_X, CONST_BOTTOM_RIGHT_Y), (0,255,0), 4)
+		cv2.rectangle(frame, (CON.CONST_UPPER_LEFT_X, CON.CONST_UPPER_LEFT_Y), (CON.CONST_BOTTOM_RIGHT_X, CON.CONST_BOTTOM_RIGHT_Y), (0,255,0), 4)
 	
 	cv2.imshow('Flame Detection',frame)
 	cv2.imshow('Motion of pixels',prev_bgr)
