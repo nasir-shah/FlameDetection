@@ -2,8 +2,8 @@
 import numpy as np
 import cv2
 import math
-import sys
 
+import sys
 sys.path.append('./../CONSTANTS')
 import CONSTANTS as CON
 
