@@ -1,0 +1,3 @@
+/home/allahbaksh/Documents/FlameDetection/Cuda_Version/CMakeFiles/rebuild_cache.dir
+/home/allahbaksh/Documents/FlameDetection/Cuda_Version/CMakeFiles/FlameDetection.dir
+/home/allahbaksh/Documents/FlameDetection/Cuda_Version/CMakeFiles/edit_cache.dir

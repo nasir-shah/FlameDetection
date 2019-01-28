@@ -7,7 +7,7 @@ import sys
 sys.path.append('./../CONSTANTS')
 import CONSTANTS as CON
 
-def Motion_Detaction(prev , next):
+def Motion_Detection(prev , next):
 	
 	flow = cv2.calcOpticalFlowFarneback(prev,next,None, 0.5,3,15,3,5,1.2,0)
 	
@@ -115,7 +115,7 @@ while(True):
 	next_frame = clone[CON.CONST_UPPER_LEFT_Y:CON.CONST_BOTTOM_RIGHT_Y , CON.CONST_UPPER_LEFT_X:CON.CONST_BOTTOM_RIGHT_X]
 	next = cv2.cvtColor(next_frame, cv2.COLOR_BGR2GRAY)
 	
-	r1 , prev_bgr = Motion_Detaction(prev , next)
+	r1 , prev_bgr = Motion_Detection(prev , next)
 	r2 = HSI_Color_Format(next_frame)
 	r3 = Flame_Area_Detection(next)
 
