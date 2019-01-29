@@ -4,4 +4,6 @@ This repository contains the source code for detection of chimney flame and issu
 Technology stack used:
 1. Python
 2. Opencv
+3. C++
+4. Cuda
 
